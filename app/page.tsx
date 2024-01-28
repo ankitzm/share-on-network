@@ -1,6 +1,28 @@
+import { writeFile } from "fs/promises";
 import Image from "next/image";
+import { join } from "path";
 
 export default function Home() {
+
+  async function upload(data: FormData) {
+    'use server'
+
+    const file: File | null = data.get('file') as unknown as File
+
+    if (!file) {
+      throw new Error('No file upload')
+    }
+
+    const bytes = await file.arrayBuffer()
+    const buffer = Buffer.from(bytes)
+
+    // writing to filesystem temporarly
+    const path = join('/', 'tmp', file.name)
+    await writeFile(path, buffer)
+    console.log(`open ${path} to see uploaded file`);
+    
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -23,6 +45,10 @@ export default function Home() {
 
       <div className="mt-14 md:mt-16 lg:mt-20">
         main
+        <form action={upload}>
+          <input type="file" name="file" />
+          <input type="submit" value="Upload File" />
+        </form>
       </div>
 
     </main>
