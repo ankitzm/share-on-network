@@ -1,9 +1,9 @@
+'use server'
+
 import { writeFile } from "fs/promises";
 import { join } from "path";
 
-async function Upload(data: FormData, filePath: string) {
-    'use server'
-
+async function Upload(data: FormData) {
     const file: File | null = data.get('file') as unknown as File
 
     if (!file) {
@@ -14,7 +14,7 @@ async function Upload(data: FormData, filePath: string) {
     const buffer = Buffer.from(bytes)
 
     // writing to filesystem temporarly
-    const path = join(filePath, '/', file.name)
+    const path = join('./public/shared-files', file.name)
     await writeFile(path, buffer)
     console.log(`open ${path} to see uploaded file`);
 }
