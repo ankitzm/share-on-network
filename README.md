@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# share-on-network
 
-## Getting Started
+## Tech Stack used
+- Nextjs with server action
+- TailwindCSS
 
-First, run the development server:
+## How it works ?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+There are two important things to note
+1. With server action, we can take advantage of the server(using nodejs) from a Nextjs app.
+2. Running a local dev server, also allow us to access the webapp on the local network using our device IP.
+
+Using `share-on-network`, a user can run the development environment on their personal computer and that will work as a server on the network.Anyone can access the webpage who is connected to same wireless/LAN network.
+
+### Getting IP Address
+
+On terminal/powershell, you can run the below commands to get IP address of your system.
+
+- windows - `ipconfig`
+- linux/mac - `ifconfig` or `hostname -I`
+
+**OUTPUT(terminal)**
+1. `ifconfig`
+```
+ankit@dev:~/share-on-network$  ifconfig
+
+eno1: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        ether 16:ab:59:53:54:89  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 213658  bytes 125412514 (119.6 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 213658  bytes 125412514 (119.6 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+wlp3s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.180  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 e480::3a7d:1x6b:824:89e  prefixlen 64  scopeid 0x20<link>
+        ether 16:ab:59:53:54:89  txqueuelen 1000  (Ethernet)
+        RX packets 8456258  bytes 10732702507 (9.9 GiB)
+        RX errors 0  dropped 4  overruns 0  frame 0
+        TX packets 3878712  bytes 698752746 (666.3 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The command will give you all the network interfaces present on the device and the IP after inet is the IP of the interface. The interface name might differ on your system.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `eno1`   - ethernet
+- `lo`     - localhost
+- `wlp3s0` - wireless network
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+My IP in this case is - 192.168.1.180 (I am connected to a wifi)
 
-## Learn More
+2. `hostname -I`
+```
+ankit@dev:~/share-on-network$  hostname -I
+192.168.1.180
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Accessing Webpage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The code will run on PORT 3000 by default and can be accessed using `localhost:3000` or `localhost:${PORT}` if port 3000 is busy.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### On network
 
-## Deploy on Vercel
+Suppose your IP is 192.168.1.180 and the code is running on PORT 3000, so the URL on you application on local network will be 192.168.1.180:3000, it can be accessed by any of the device connected on same network.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The link will look like this: `${IP_Address}:${PORT_Number}`
