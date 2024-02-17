@@ -56,7 +56,7 @@ The command will give you all the network interfaces present on the device and t
 - `lo`     - localhost
 - `wlp3s0` - wireless network
 
-My IP in this case is - 192.168.1.180 (I am connected to a wifi)
+My IP in this case is - `192.168.1.180` (I am connected to a wifi)
 
 2. `hostname -I`
 ```
@@ -70,6 +70,16 @@ The code will run on PORT 3000 by default and can be accessed using `localhost:3
 
 ### On network
 
-Suppose your IP is 192.168.1.180 and the code is running on PORT 3000, so the URL on you application on local network will be 192.168.1.180:3000, it can be accessed by any of the device connected on same network.
+Suppose your IP is `192.168.1.180` and the code is running on PORT `3000`, so the URL on you application on local network will be `192.168.1.180:3000`, it can be accessed by any of the device connected on same network.
 
 The link will look like this: `${IP_Address}:${PORT_Number}`
+
+## Little Demo
+
+**Desktop**
+https://github.com/ankitzm/share-on-network/assets/66105983/02c1a463-971d-4581-8767-87674c3281a1
+
+**Mobile**
+https://github.com/ankitzm/share-on-network/assets/66105983/f0ebeb3e-fc6d-454d-9a98-ee4c5b9a3111
+
+
