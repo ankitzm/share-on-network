@@ -1,4 +1,4 @@
-# share-on-network
+# share-on-network (file sharing on local network)
 
 ## Tech Stack used
 - Nextjs with server action
@@ -11,6 +11,11 @@ There are two important things to note
 2. Running a local dev server, also allow us to access the webapp on the local network using our device IP.
 
 Using `share-on-network`, a user can run the development environment on their personal computer and that will work as a server on the network.Anyone can access the webpage who is connected to same wireless/LAN network.
+
+### Repository Structure
+<img width="753" alt="Screenshot 2025-03-31 at 11 30 14 PM" src="https://github.com/user-attachments/assets/4c77f23a-6a7e-4dd3-b802-0ac11e16c31e" />
+<br/>
+chart credits: https://gitdiagram.com/ankitzm/share-on-network
 
 ### Getting IP Address
 
